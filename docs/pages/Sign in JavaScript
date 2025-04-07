@@ -1,0 +1,209 @@
+```javascript
+// Import necessary libraries
+const express = require('express');
+const app = express();
+const fs = require('fs');
+const path = require('path');
+
+// Set up the port
+const port = 3000;
+
+// Set up the display (using HTML and CSS)
+app.use(express.static('public'));
+
+// Define colors
+const white = '#FFFFFF';
+const black = '#000000';
+
+// Set up font (using CSS)
+// In public/styles.css:
+// body {
+//   font-family: Arial, sans-serif;
+// }
+
+// Render text (using HTML)
+// In public/index.html:
+// <h1 id="sign-up">Sign Up!</h1>
+// <label for="username">Username:</label>
+// <input type="text" id="username" />
+// <label for="email">Email:</label>
+// <input type="email" id="email" />
+// <label for="password">Password:</label>
+// <input type="password" id="password" />
+// <label for="confirm-password">Confirm Password:</label>
+// <input type="password" id="confirm-password" />
+
+// Input box variables
+let activeBox = null;
+let userText = '';
+let emailText = '';
+let passwordText = '';
+let confirmPasswordText = '';
+
+// Function to save data
+function saveData(username, email, password, confirmPassword) {
+  const data = {
+    username,
+    email,
+    password,
+    confirmPassword,
+  };
+  fs.writeFileSync('signup_data.json', JSON.stringify(data));
+}
+
+// Handle form submission
+app.use(express.json());
+app.post('/submit', (req, res) => {
+  const { username, email, password, confirmPassword } = req.body;
+  if (password !== confirmPassword) {
+    console.log('Error, password does not match confirmation password');
+  } else {
+    saveData(username, email, password, confirmPassword);
+  }
+  res.redirect('/');
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+```
+
+```html
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1 id="sign-up">Sign Up!</h1>
+  <form id="sign-up-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" />
+    <label for="email">Email:</label>
+    <input type="email" id="email" />
+    <label for="password">Password:</label>
+    <input type="password" id="password" />
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+```css
+/* public/styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFFFFF;
+}
+
+#sign-up {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #CCCCCC;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+```
+
+```javascript
+// public/script.js
+const form = document.getElementById('sign-up-form');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirm-password');
+
+let activeBox = null;
+let userText = '';
+let emailText = '';
+let passwordText = '';
+let confirmPasswordText = '';
+
+usernameInput.addEventListener('focus', () => {
+  activeBox = usernameInput;
+});
+
+emailInput.addEventListener('focus', () => {
+  activeBox = emailInput;
+});
+
+passwordInput.addEventListener('focus', () => {
+  activeBox = passwordInput;
+});
+
+confirmPasswordInput.addEventListener('focus', () => {
+  activeBox = confirmPasswordInput;
+});
+
+usernameInput.addEventListener('input', (e) => {
+  userText = e.target.value;
+});
+
+emailInput.addEventListener('input', (e) => {
+  emailText = e.target.value;
+});
+
+passwordInput.addEventListener('input', (e) => {
+  passwordText = e.target.value;
+});
+
+confirmPasswordInput.addEventListener('input', (e) => {
+  confirmPasswordText = e.target.value;
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  fetch('/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: userText,
+      email: emailText,
+      password: passwordText,
+      confirmPassword: confirmPasswordText,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
+});
+```
