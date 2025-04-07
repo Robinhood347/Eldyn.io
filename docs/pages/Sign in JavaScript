@@ -1,0 +1,24 @@
+const form = document.getElementById('sign-up-form');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirm-password');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const username = usernameInput.value;
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  const confirmPassword = confirmPasswordInput.value;
+
+  if (password !== confirmPassword) {
+    alert('Error: Passwords do not match!');
+  } else {
+    console.log('Username:', username);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Confirm Password:', confirmPassword);
+    alert('Sign-up successful (but not saved)!');
+  }
+});
