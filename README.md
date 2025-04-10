@@ -9,7 +9,7 @@ Eldyn.io is an immersive, isometric multiplayer world where players can explore,
 ## 🤝 Contributing
 
 1. **Join our community** on Discord:  
-   [![Discord](https://img.shields.io/discord/your-server-id?label=Join%20our%20Discord&logo=discord&style=for-the-badge)](https://discord.gg/4s3WwTFa)
+   [![Discord](https://img.shields.io/discord/your-server-id?label=Join%20our%20Discord&logo=discord&style=for-the-badge)](https://discord.gg/2h72wZcT)
 
 2. **Fork the repository** and create a new branch for your feature
 
