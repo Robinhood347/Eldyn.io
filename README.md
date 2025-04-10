@@ -4,7 +4,7 @@
 
 ## 🚀 About the Project
 
-Eldyn.io is an immersive multiplayer world where players can explore, build, and conquer in the magical land of Eldyn. This repository contains the core code that powers this enchanting experience.
+Eldyn.io is an immersive, isometric multiplayer world where players can explore, build, and conquer in the magical land of Eldyn. This repository contains the core code that powers this enchanting experience.
 
 ## 🤝 Contributing
 
