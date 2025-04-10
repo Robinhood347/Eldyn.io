@@ -1,0 +1,238 @@
+@font-face {
+  font-family: 'CS Grimrock';
+  src: url('/public/fonts/cs-grimrock.woff2') format('woff2'),
+       url('/public/fonts/cs-grimrock.ttf') format('truetype');
+}
+
+.pole {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 125px;
+  height: 100vh;
+  background: linear-gradient(to right, rgb(60, 30, 15) 10%, rgb(140, 90, 60) 50%, rgb(60, 30, 15) 90%);
+  border-radius: 5px;
+  transform: translateX(-50%);
+}
+
+
+body {
+  background: #5c5c5c;
+  margin: 0;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cloud base styles */
+.cloud-1, .cloud-2, .cloud-3, .cloud-4, .cloud-5, .cloud-6, .cloud-7, .cloud-8, .cloud-9, .cloud-10,
+.cloud-11, .cloud-12, .cloud-13, .cloud-14, .cloud-15, .cloud-16, .cloud-17, .cloud-18, .cloud-19, .cloud-20,
+.cloud-21, .cloud-22, .cloud-23, .cloud-24, .cloud-25, .cloud-26, .cloud-27, .cloud-28, .cloud-29, .cloud-30,
+.cloud-31, .cloud-32, .cloud-33, .cloud-34, .cloud-35, .cloud-36, .cloud-37, .cloud-38, .cloud-39, .cloud-40,
+.cloud-41, .cloud-42, .cloud-43, .cloud-44, .cloud-45, .cloud-46, .cloud-47, .cloud-48, .cloud-49, .cloud-50,
+.cloud-51, .cloud-52, .cloud-53, .cloud-54, .cloud-55, .cloud-56, .cloud-57, .cloud-58, .cloud-59, .cloud-60,
+.cloud-61, .cloud-62, .cloud-63, .cloud-64, .cloud-65, .cloud-66, .cloud-67, .cloud-68, .cloud-69, .cloud-70,
+.cloud-71, .cloud-72, .cloud-73, .cloud-74, .cloud-75, .cloud-76, .cloud-77, .cloud-78, .cloud-79, .cloud-80,
+.cloud-81, .cloud-82, .cloud-83, .cloud-84, .cloud-85, .cloud-86, .cloud-87, .cloud-88, .cloud-89, .cloud-90,
+.cloud-91, .cloud-92, .cloud-93, .cloud-94, .cloud-95, .cloud-96, .cloud-97, .cloud-98, .cloud-99, .cloud-100 {
+  content: '';
+  position: fixed;
+  width: 180px;
+  height: 90px;
+  background: rgb(212, 212, 212, 0.7);
+  border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+  filter: blur(15px);
+  z-index: -1;
+}
+
+/* Cloud positions and animations */
+.cloud-1 { top: 10%; width: 220px; animation: cloud 8s infinite linear; }
+.cloud-2 { top: 50%; width: 200px; animation: cloud 6s infinite linear; }
+.cloud-3 { top: 80%; width: 190px; animation: cloud 7s infinite linear; }
+.cloud-4 { top: 25%; width: 220px; animation: cloud 11s infinite linear; }
+.cloud-5 { top: 55%; width: 200px; animation: cloud 7.5s infinite linear; }
+.cloud-6 { top: 75%; left: -40%; width: 190px; animation: cloud 8.5s infinite linear; }
+.cloud-7 { top: 35%; left: -25%; width: 240px; animation: cloud 9.5s infinite linear; }
+.cloud-8 { top: 65%; left: -35%; width: 210px; animation: cloud 6.5s infinite linear; }
+.cloud-9 { top: 15%; left: -15%; width: 230px; animation: cloud 10.5s infinite linear; }
+.cloud-10 { top: 85%; left: -45%; width: 200px; animation: cloud 7.8s infinite linear; }
+.cloud-11 { top: 5%; left: -38%; width: 250px; animation: cloud 12s infinite linear; }
+.cloud-12 { top: 45%; left: -28%; width: 220px; animation: cloud 8.8s infinite linear; }
+.cloud-13 { top: 20%; left: -32%; width: 260px; animation: cloud 13s infinite linear; }
+.cloud-14 { top: 40%; left: -22%; width: 190px; animation: cloud 9.2s infinite linear; }
+.cloud-15 { top: 70%; left: -42%; width: 240px; animation: cloud 10.8s infinite linear; }
+.cloud-16 { top: 90%; left: -18%; width: 210px; animation: cloud 7.2s infinite linear; }
+.cloud-17 { top: 30%; left: -38%; width: 230px; animation: cloud 11.5s infinite linear; }
+.cloud-18 { top: 60%; left: -28%; width: 200px; animation: cloud 8.2s infinite linear; }
+.cloud-19 { top: 82%; left: -35%; width: 250px; animation: cloud 9.8s infinite linear; }
+.cloud-20 { top: 12%; left: -25%; width: 220px; animation: cloud 10.2s infinite linear; }
+.cloud-21 { top: 38%; left: -42%; width: 240px; animation: cloud 12.5s infinite linear; }
+.cloud-22 { top: 78%; left: -32%; width: 210px; animation: cloud 7.8s infinite linear; }
+.cloud-23 { top: 25%; left: -22%; width: 230px; animation: cloud 11.2s infinite linear; }
+.cloud-24 { top: 52%; left: -38%; width: 200px; animation: cloud 8.5s infinite linear; }
+.cloud-25 { top: 88%; left: -28%; width: 250px; animation: cloud 9.5s infinite linear; }
+.cloud-26 { top: 18%; left: -35%; width: 220px; animation: cloud 10.8s infinite linear; }
+.cloud-27 { top: 42%; left: -42%; width: 240px; animation: cloud 13.2s infinite linear; }
+.cloud-28 { top: 72%; left: -22%; width: 210px; animation: cloud 7.5s infinite linear; }
+.cloud-29 { top: 28%; left: -32%; width: 230px; animation: cloud 11.8s infinite linear; }
+.cloud-30 { top: 58%; left: -25%; width: 200px; animation: cloud 8.8s infinite linear; }
+.cloud-31 { top: 92%; left: -38%; width: 250px; animation: cloud 9.2s infinite linear; }
+.cloud-32 { top: 8%; left: -28%; width: 220px; animation: cloud 10.5s infinite linear; }
+.cloud-33 { top: 33%; left: -45%; width: 260px; animation: cloud 11.2s infinite linear; }
+.cloud-34 { top: 62%; left: -18%; width: 230px; animation: cloud 8.4s infinite linear; }
+.cloud-35 { top: 95%; left: -32%; width: 240px; animation: cloud 9.8s infinite linear; }
+.cloud-36 { top: 22%; left: -42%; width: 210px; animation: cloud 12.5s infinite linear; }
+.cloud-37 { top: 48%; left: -25%; width: 250px; animation: cloud 7.2s infinite linear; }
+.cloud-38 { top: 75%; left: -38%; width: 220px; animation: cloud 10.8s infinite linear; }
+.cloud-39 { top: 15%; left: -28%; width: 230px; animation: cloud 9.5s infinite linear; }
+.cloud-40 { top: 68%; left: -35%; width: 240px; animation: cloud 11.5s infinite linear; }
+.cloud-41 { top: 3%; left: -42%; width: 210px; animation: cloud 8.8s infinite linear; }
+.cloud-42 { top: 82%; left: -22%; width: 250px; animation: cloud 13.2s infinite linear; }
+.cloud-43 { top: 37%; left: -48%; width: 220px; animation: cloud 7.8s infinite linear; }
+.cloud-44 { top: 55%; left: -15%; width: 230px; animation: cloud 10.2s infinite linear; }
+.cloud-45 { top: 98%; left: -38%; width: 240px; animation: cloud 9.2s infinite linear; }
+.cloud-46 { top: 27%; left: -42%; width: 210px; animation: cloud 11.8s infinite linear; }
+.cloud-47 { top: 43%; left: -25%; width: 250px; animation: cloud 8.5s infinite linear; }
+.cloud-48 { top: 78%; left: -35%; width: 220px; animation: cloud 12.8s infinite linear; }
+.cloud-49 { top: 23%; left: -42%; width: 230px; animation: cloud 9.3s infinite linear; }
+.cloud-50 { top: 67%; left: -28%; width: 210px; animation: cloud 11.7s infinite linear; }
+.cloud-51 { top: 89%; left: -38%; width: 240px; animation: cloud 8.9s infinite linear; }
+.cloud-52 { top: 34%; left: -25%; width: 200px; animation: cloud 10.4s infinite linear; }
+.cloud-53 { top: 71%; left: -42%; width: 250px; animation: cloud 12.1s infinite linear; }
+.cloud-54 { top: 16%; left: -32%; width: 220px; animation: cloud 7.6s infinite linear; }
+.cloud-55 { top: 83%; left: -28%; width: 230px; animation: cloud 9.9s infinite linear; }
+.cloud-56 { top: 45%; left: -35%; width: 210px; animation: cloud 11.3s infinite linear; }
+.cloud-57 { top: 92%; left: -42%; width: 240px; animation: cloud 8.2s infinite linear; }
+.cloud-58 { top: 29%; left: -25%; width: 200px; animation: cloud 10.7s infinite linear; }
+.cloud-59 { top: 76%; left: -38%; width: 250px; animation: cloud 12.4s infinite linear; }
+.cloud-60 { top: 13%; left: -32%; width: 220px; animation: cloud 7.9s infinite linear; }
+.cloud-61 { top: 87%; left: -28%; width: 230px; animation: cloud 9.6s infinite linear; }
+.cloud-62 { top: 41%; left: -35%; width: 210px; animation: cloud 11.1s infinite linear; }
+.cloud-63 { top: 94%; left: -42%; width: 240px; animation: cloud 8.5s infinite linear; }
+.cloud-64 { top: 26%; left: -25%; width: 200px; animation: cloud 10.9s infinite linear; }
+.cloud-65 { top: 73%; left: -38%; width: 250px; animation: cloud 12.6s infinite linear; }
+.cloud-66 { top: 19%; left: -32%; width: 220px; animation: cloud 7.4s infinite linear; }
+.cloud-67 { top: 85%; left: -28%; width: 230px; animation: cloud 9.8s infinite linear; }
+.cloud-68 { top: 37%; left: -35%; width: 210px; animation: cloud 11.4s infinite linear; }
+.cloud-69 { top: 96%; left: -42%; width: 240px; animation: cloud 8.7s infinite linear; }
+.cloud-70 { top: 31%; left: -25%; width: 200px; animation: cloud 10.3s infinite linear; }
+.cloud-71 { top: 79%; left: -38%; width: 250px; animation: cloud 12.2s infinite linear; }
+.cloud-72 { top: 22%; left: -32%; width: 220px; animation: cloud 7.7s infinite linear; }
+.cloud-73 { top: 88%; left: -28%; width: 230px; animation: cloud 9.4s infinite linear; }
+.cloud-74 { top: 44%; left: -35%; width: 210px; animation: cloud 11.6s infinite linear; }
+.cloud-75 { top: 91%; left: -42%; width: 240px; animation: cloud 8.3s infinite linear; }
+.cloud-76 { top: 28%; left: -25%; width: 200px; animation: cloud 10.8s infinite linear; }
+.cloud-77 { top: 75%; left: -38%; width: 250px; animation: cloud 12.7s infinite linear; }
+.cloud-78 { top: 17%; left: -32%; width: 220px; animation: cloud 7.3s infinite linear; }
+.cloud-79 { top: 84%; left: -28%; width: 230px; animation: cloud 9.7s infinite linear; }
+.cloud-80 { top: 39%; left: -35%; width: 210px; animation: cloud 11.2s infinite linear; }
+.cloud-81 { top: 93%; left: -42%; width: 240px; animation: cloud 8.6s infinite linear; }
+.cloud-82 { top: 33%; left: -25%; width: 200px; animation: cloud 10.5s infinite linear; }
+.cloud-83 { top: 77%; left: -38%; width: 250px; animation: cloud 12.3s infinite linear; }
+.cloud-84 { top: 21%; left: -32%; width: 220px; animation: cloud 7.8s infinite linear; }
+.cloud-85 { top: 86%; left: -28%; width: 230px; animation: cloud 9.5s infinite linear; }
+.cloud-86 { top: 43%; left: -35%; width: 210px; animation: cloud 11.5s infinite linear; }
+.cloud-87 { top: 95%; left: -42%; width: 240px; animation: cloud 8.4s infinite linear; }
+.cloud-88 { top: 27%; left: -25%; width: 200px; animation: cloud 10.6s infinite linear; }
+.cloud-89 { top: 74%; left: -38%; width: 250px; animation: cloud 12.5s infinite linear; }
+.cloud-90 { top: 18%; left: -32%; width: 220px; animation: cloud 7.5s infinite linear; }
+.cloud-91 { top: 82%; left: -28%; width: 230px; animation: cloud 9.2s infinite linear; }
+.cloud-92 { top: 36%; left: -35%; width: 210px; animation: cloud 11.8s infinite linear; }
+.cloud-93 { top: 97%; left: -42%; width: 240px; animation: cloud 8.1s infinite linear; }
+.cloud-94 { top: 24%; left: -25%; width: 200px; animation: cloud 10.1s infinite linear; }
+.cloud-95 { top: 72%; left: -38%; width: 250px; animation: cloud 12.9s infinite linear; }
+.cloud-96 { top: 14%; left: -32%; width: 220px; animation: cloud 7.1s infinite linear; }
+.cloud-97 { top: 81%; left: -28%; width: 230px; animation: cloud 9.1s infinite linear; }
+.cloud-98 { top: 35%; left: -35%; width: 210px; animation: cloud 11.9s infinite linear; }
+.cloud-99 { top: 98%; left: -42%; width: 240px; animation: cloud 8.8s infinite linear; }
+.cloud-100 { top: 30%; left: -25%; width: 200px; animation: cloud 10.2s infinite linear; }
+
+@keyframes cloud {
+  0% {
+    transform: translateX(var(--start-pos)) scale(1) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) scale(1.2) rotate(5deg);
+    opacity: 0;
+  }
+}
+
+/* Distribute clouds across screen sections */
+.cloud-1, .cloud-2, .cloud-3, .cloud-4, .cloud-5, .cloud-6, .cloud-7, .cloud-8, .cloud-9, .cloud-10 { --start-pos: -50%; }
+.cloud-11, .cloud-12, .cloud-13, .cloud-14, .cloud-15, .cloud-16, .cloud-17, .cloud-18, .cloud-19, .cloud-20 { --start-pos: -40%; }
+.cloud-21, .cloud-22, .cloud-23, .cloud-24, .cloud-25, .cloud-26, .cloud-27, .cloud-28, .cloud-29, .cloud-30 { --start-pos: -30%; }
+.cloud-31, .cloud-32, .cloud-33, .cloud-34, .cloud-35, .cloud-36, .cloud-37, .cloud-38, .cloud-39, .cloud-40 { --start-pos: -20%; }
+.cloud-41, .cloud-42, .cloud-43, .cloud-44, .cloud-45, .cloud-46, .cloud-47, .cloud-48, .cloud-49, .cloud-50 { --start-pos: -10%; }
+.cloud-51, .cloud-52, .cloud-53, .cloud-54, .cloud-55, .cloud-56, .cloud-57, .cloud-58, .cloud-59, .cloud-60 { --start-pos: 0%; }
+.cloud-61, .cloud-62, .cloud-63, .cloud-64, .cloud-65, .cloud-66, .cloud-67, .cloud-68, .cloud-69, .cloud-70 { --start-pos: 10%; }
+.cloud-71, .cloud-72, .cloud-73, .cloud-74, .cloud-75, .cloud-76, .cloud-77, .cloud-78, .cloud-79, .cloud-80 { --start-pos: 20%; }
+.cloud-81, .cloud-82, .cloud-83, .cloud-84, .cloud-85, .cloud-86, .cloud-87, .cloud-88, .cloud-89, .cloud-90 { --start-pos: 30%; }
+.cloud-91, .cloud-92, .cloud-93, .cloud-94, .cloud-95, .cloud-96, .cloud-97, .cloud-98, .cloud-99, .cloud-100 { --start-pos: 40%; }
+
+.container {
+  max-width: 525px;
+  margin: 0 auto;
+  background-color: rgb(181, 136, 99); /* Light brown */
+  height: 25vh;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(101, 67, 33, 0.4);
+}
+
+h1 {
+  font-family: 'CS Grimrock', serif;
+  text-align: center;
+  color: rgb(101, 67, 33);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label, .link, .button {
+  color: rgb(101, 67, 33);
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: rgb(101, 67, 33);
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(101, 67, 33);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: rgb(80, 53, 26);
+}
