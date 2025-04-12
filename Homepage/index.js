@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/homepage/signup/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/signup', (req, res) => {
