@@ -9,15 +9,15 @@ app.use(bodyParser.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + 'Homepage/signup/index.html');
 });
 
 app.get('/signup', (req, res) => {
-  res.sendFile(__dirname + '/homepage/signup/signup.html');
+  res.sendFile(__dirname + '/Homepage/signup/signup.html');
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/homepage/signup/login.html');
+  res.sendFile(__dirname + '/Homepage/signup/login.html');
 });
 
 app.post('/signup', (req, res) => {
