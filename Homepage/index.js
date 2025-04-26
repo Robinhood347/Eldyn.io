@@ -1,28 +1,30 @@
 const express = require('express');
-const path = require('path'); // Import path module for better file handling
+const path = require('path'); // Use path module for file handling
 const bodyParser = require('body-parser');
 const db = require('./db');
 
 const app = express();
-const port = process.env.PORT || 5000; // Allow Render to set the correct port
+const port = process.env.PORT || 5000; // Use Render's assigned port if available
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public'))); // Correct static file path
 app.use(bodyParser.json());
 
-// Routes
+// Serve homepage correctly
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'signup', 'index.html')); // Ensure correct path
+  res.sendFile(path.join(__dirname, 'Homepage', 'index.html')); // Fix homepage route
 });
 
+// Serve signup page properly
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'signup', 'index.html')); // Fix incorrect path
+  res.sendFile(path.join(__dirname, 'Homepage', 'signup', 'index.html')); // Correct path
 });
 
+// Serve login page correctly
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'signup', 'login.html'));
+  res.sendFile(path.join(__dirname, 'Homepage', 'signup', 'login.html'));
 });
 
-// Handle signup
+// Handle signup POST request
 app.post('/signup', (req, res) => {
   const { username, email, password } = req.body;
 
@@ -42,7 +44,7 @@ app.post('/signup', (req, res) => {
   );
 });
 
-// Handle login
+// Handle login POST request
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
@@ -62,6 +64,7 @@ app.post('/login', (req, res) => {
   );
 });
 
+// Start server
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server running at http://0.0.0.0:${port}`);
 });
