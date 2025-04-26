@@ -4,11 +4,6 @@ const db = require('./db');
 const app = express();
 const port = 5000;
 
-document.getElementById("startGame").addEventListener("click", function() {
-  document.getElementById("homepage").style.display = "none"; 
-  document.getElementById("gameplay").style.display = "block"; 
-});
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
