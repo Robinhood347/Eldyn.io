@@ -1,22 +1,22 @@
 const express = require('express');
-const path = require('path'); // Use path module for file handling
+const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./db');
-
 const app = express();
-const port = process.env.PORT || 5000; // Use Render's assigned port if available
+const port = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, 'public'))); // Correct static file path
+// Change from 'public' to serve from root directory
+app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
 
 // Serve homepage correctly
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Homepage', 'index.html')); // Fix homepage route
+  res.sendFile(path.join(__dirname, 'index.html')); // Main index.html in root
 });
 
 // Serve signup page properly
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Homepage', 'signup', 'index.html')); // Correct path
+  res.sendFile(path.join(__dirname, 'Homepage', 'signup', 'signup.html')); 
 });
 
 // Serve login page correctly
@@ -27,7 +27,6 @@ app.get('/login', (req, res) => {
 // Handle signup POST request
 app.post('/signup', (req, res) => {
   const { username, email, password } = req.body;
-
   db.run('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', 
     [username, email, password], 
     function(err) {
@@ -47,7 +46,6 @@ app.post('/signup', (req, res) => {
 // Handle login POST request
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-
   db.get('SELECT * FROM users WHERE username = ? AND password = ?', 
     [username, password], 
     (err, user) => {
