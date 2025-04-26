@@ -4,12 +4,17 @@ const db = require('./db');
 const app = express();
 const port = 5000;
 
+document.getElementById("startGame").addEventListener("click", function() {
+  document.getElementById("homepage").style.display = "none"; 
+  document.getElementById("gameplay").style.display = "block"; 
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + 'Homepage/signup/index.html');
+  res.sendFile(__dirname + '/Homepage/signup/index.html');
 });
 
 app.get('/signup', (req, res) => {
