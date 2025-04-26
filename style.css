@@ -1,0 +1,47 @@
+body {
+    background-color: lightgray; /* Back to original page background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+canvas {
+    border: 2px solid black;
+    background-color: burlywood; /* Light brown canvas */
+}
+
+
+
+#chatbox {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(128, 0, 0, 0.5); /* Maroon, semi-transparent */
+  color: white;
+  padding: 10px;
+  border-top: 2px solid white;
+}
+
+#chatlog {
+  max-height: 150px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+input {
+  width: 100%;
+  padding: 5px;
+  background: transparent; /* Keeps input field consistent */
+  color: white; /* Text remains readable */
+}
+
+/* Update placeholder text to maroon */
+input::placeholder {
+  color: maroon;
+}
