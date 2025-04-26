@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eldyn.io Game</title>
   <link rel="stylesheet" href="Gameplay/style.css">
+  <link rel="stylesheet" href="Homepage/signup/style.css">
 </head>
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-
-  <div id="chatbox" style="display: none;">  <!-- Initially hidden -->
-    <div id="chatlog"></div>
-    <input type="text" id="chatInput" placeholder="Type your message..." />
+  <div id="homepage">
+    <link rel="stylesheet" href="Homepage/signup/style.css">
+    <script src="Homepage/index.js"></script>
+    <script src="Homepage/db.js"></script>
+    <h1>Welcome to Eldyn.io</h1>
+    <button id="startGame">Start Game</button>
   </div>
-  
-<link rel="stylesheet" href="Homepage/signup/style.css">
-<script src="Homepage/index.js"></script>
-<script src="Homepage/db.js"></script>
 
-  <script src="Gameplay/script.js"></script>
+  <div id="gameplay" style="display: none;">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="chatbox" style="display: none;">
+      <div id="chatlog"></div>
+      <input type="text" id="chatInput" placeholder="Type your message..." />
+    </div>
+    <script src="Gameplay/script.js"></script>
+  </div>
 </body>
+
 </html>
 
 <!--  <script src="index.js"></script> -->
