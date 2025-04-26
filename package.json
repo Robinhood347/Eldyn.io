@@ -9,5 +9,8 @@
   },
   "scripts": {
     "start": "node Homepage/index.js"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
