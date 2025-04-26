@@ -12,6 +12,11 @@ document.getElementById('sign-up-form').addEventListener('submit', async (e) => 
     password: document.getElementById('password').value
   };
 
+  if (!data.username || !data.email || !data.password) {
+    alert("All fields are required!");
+    return;
+  }
+
   const backendURL = "https://eldyn-io.onrender.com/signup";
 
   try {
