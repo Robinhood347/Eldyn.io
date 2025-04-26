@@ -4,7 +4,7 @@ const db = require('./db');
 const app = express();
 const port = 5000;
 
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 app.use(bodyParser.json());
 
 // Routes
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  res.sendFile(__dirname + '/signup/signup.html');
+  res.sendFile(__dirname + '/signup/index.html');
 });
 
 app.get('/login', (req, res) => {
