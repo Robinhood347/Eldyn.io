@@ -5,6 +5,25 @@ const db = require('./db');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+app.use(cors({
+    origin: 'https://eldyn-io.onrender.com', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
+app.get('/test', (req, res) => {
+    res.json({ message: 'CORS is working!' });
+});
+
+app.listen(10000, () => {
+    console.log('Server running on port 10000');
+});
+
 // Change from 'public' to serve from root directory
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
