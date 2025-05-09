@@ -1,8 +1,14 @@
 // ============================================
 // Global Variable Declarations & Setup
 // ============================================
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+window.onload = function() {
+    const canvas = document.getElementById("gameCanvas");
+    if (!canvas) {
+        console.error("Game canvas not found! Check your HTML.");
+        return;
+    }
+    const ctx = canvas.getContext("2d");
+};
 
 // Define safe zone and chat elements.
 const safeZone = { x: 0, y: 0, width: 800, height: 600 };
@@ -10,7 +16,6 @@ const chatInput = document.getElementById("chatInput");
 const chatbox = document.getElementById("chatbox");
 const chatlog = document.getElementById("chatlog");
 
-// NPC behavior text by type
 const npcDialogue = {
   pillager: {
     taunts: [
