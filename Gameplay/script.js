@@ -1,14 +1,8 @@
 // ============================================
 // Global Variable Declarations & Setup
 // ============================================
-window.onload = function() {
-    const canvas = document.getElementById("gameCanvas");
-    if (!canvas) {
-        console.error("Game canvas not found! Check your HTML.");
-        return;
-    }
-    const ctx = canvas.getContext("2d");
-};
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
 // Define safe zone and chat elements.
 const safeZone = { x: 0, y: 0, width: 800, height: 600 };
@@ -16,6 +10,7 @@ const chatInput = document.getElementById("chatInput");
 const chatbox = document.getElementById("chatbox");
 const chatlog = document.getElementById("chatlog");
 
+// NPC behavior text by type
 const npcDialogue = {
   pillager: {
     taunts: [
@@ -39,8 +34,24 @@ const npcDialogue = {
       "You ain't from here!",
       "ARGRRRRRRRRR"
     ]
+  },
+  vagabond: {
+    taunts: [
+      "These lands are not safe",
+      "What are you doing? I'm not the enemy!",
+      "Beware…",
+      "Excuse me...",
+      "Can you stop please?",
+      "Fine, please stop attacking",
+      "AHHHH stop",
+      "Stop. I only wanted to ask a question",
+      "You don't have any spare coin do you?",
+      "Oi, you're not from around here",
+      "Spare some food?",
+      "Can I join you",
+      "Do not go west"
+    ]
   }
-  // Additional NPC types can be added here
 };
 
 function getRandomTaunt(npcType) {
@@ -288,7 +299,68 @@ function moveNPCs() {
         }
         break;
         
-      // Add more NPC types here with their specific behaviors
+      case 'vagabond':
+        // Vagabond flees from player when too close (likes personal space)
+        const personalSpaceDistance = 50; // Distance vagabond wants to maintain
+        const fleeSpeed = 1.5;
+        
+        if (distance < personalSpaceDistance) {
+            // Normalize direction vector
+          let magnitude = Math.sqrt(dx * dx + dy * dy);
+          let unitDx = dx / magnitude;
+          let unitDy = dy / magnitude;
+          // Move away from player
+          let intendedDx = -unitDx * fleeSpeed; // Negative to move away, speed 1.5
+          let intendedDy = -unitDy * fleeSpeed;
+          let newX = npc.x + intendedDx;
+          let newY = npc.y + intendedDy;
+          let xBlocked = isColliding(newX, npc.y, npc.radius, trees);
+          let yBlocked = isColliding(npc.x, newY, npc.radius, trees);
+          if (newX - npc.radius < safeZone.x || newX + npc.radius > safeZone.x + safeZone.width) {
+            xBlocked = true;
+          }
+          if (newY - npc.radius < safeZone.y || newY + npc.radius > safeZone.y + safeZone.height) {
+            yBlocked = true;
+          }
+          if (!xBlocked) npc.x = newX;
+          if (!yBlocked) npc.y = newY;
+        }
+        
+        // Handle taunting behavior for vagabonds
+        if (distance <= npcSightRange) {
+          if (!npc.taunting) {
+            npc.taunting = true;
+            npc.tauntInterval = setInterval(() => {
+              let tauntText = getRandomTaunt(npc.type);
+              let npcFloatingMsg = {
+                text: tauntText,
+                x: npc.x,
+                y: npc.y - 30,
+                opacity: 1,
+                isNPC: true,
+                fading: false
+              };
+              floatingMessages.push(npcFloatingMsg);
+              setTimeout(() => {
+                npcFloatingMsg.fading = true;
+              }, 3000);
+              let chatText = `<span style="color:gray;">NPC (${npc.typeName}): ${tauntText}</span>`;
+              messageHistory.push(chatText);
+              if (messageHistory.length > 20) {
+                messageHistory.shift();
+              }
+              renderChatLog();
+            }, 4000);
+          }
+        } else {
+          // Out of range - clear taunting
+          if (npc.taunting) {
+            clearInterval(npc.tauntInterval);
+            npc.taunting = false;
+          }
+        }
+        break;
+        
       default:
         // Default behavior for unknown NPC types
         console.warn("Unknown NPC type:", npc.type);
@@ -320,7 +392,12 @@ function createNPC(type, x, y) {
         speed: 2,
         taunting: false
       };
-    // Add more NPC types here with their specific properties
+    case 'vagabond':
+      return {
+        ...baseNPC,
+        speed: 1.5, // Vagabonds flee at moderate speed
+        taunting: false
+      };
     default:
       console.warn("Unknown NPC type:", type);
       return baseNPC;
@@ -332,8 +409,11 @@ function spawnNPC() {
   const spawnX = Math.random() * 400;
   const spawnY = Math.random() * 300;
   
-  // Currently only spawning pillagers, but can easily add more types
-  const npc = createNPC('pillager', spawnX, spawnY);
+  // Randomly choose between pillager and vagabond (50/50 chance)
+  const npcTypes = ['pillager', 'vagabond'];
+  const randomType = npcTypes[Math.floor(Math.random() * npcTypes.length)];
+  
+  const npc = createNPC(randomType, spawnX, spawnY);
   npcs.push(npc);
   console.log(`New ${npc.typeName} spawned at ${spawnX}, ${spawnY}`);
 }
@@ -593,6 +673,9 @@ function draw() {
         case 'pillager':
           ctx.fillStyle = "orange";
           break;
+        case 'vagabond':
+          ctx.fillStyle = "brown";
+          break;
         default:
           ctx.fillStyle = "purple"; // Default color for unknown types
       }
@@ -600,6 +683,15 @@ function draw() {
       ctx.fill();
       ctx.closePath();
       drawNPCHealthBars(npc);
+      
+      // Draw NPC name above the NPC
+      ctx.font = "12px Arial";
+      ctx.fillStyle = "white";
+      const nameText = npc.typeName;
+      const nameWidth = ctx.measureText(nameText).width;
+      const nameX = npc.x - nameWidth / 2;
+      const nameY = npc.y - npc.radius - 15; // Position above the NPC
+      ctx.fillText(nameText, nameX, nameY);
     }
   });
   ctx.restore();
@@ -719,6 +811,11 @@ function renderChatLog() {
     chatlog.appendChild(newMessage);
   });
 }
+
+// ============================================
+// Start the Game
+// ============================================
+draw();
 
 // ============================================
 // Start the Game
